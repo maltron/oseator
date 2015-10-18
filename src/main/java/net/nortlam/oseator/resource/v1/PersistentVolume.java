@@ -1,4 +1,4 @@
-package net.nortlam.oseator.resource;
+package net.nortlam.oseator.resource.v1;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessOrder;
