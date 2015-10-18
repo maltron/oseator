@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -16,6 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorOrder(XmlAccessOrder.UNDEFINED)
 @XmlType(propOrder={"kind","apiVersion", "metada", "spec", "status"})
 public class PersistentVolumeSpec implements Serializable {
+    
+    @XmlElement(name="capacity", type=Object.class, required=false)
+    private Object capacity;
     
     
     
