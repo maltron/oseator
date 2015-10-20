@@ -23,10 +23,18 @@ public class PersistentVolumeSpec implements Serializable {
      * see http://releases.k8s.io/HEAD/docs/user-guide/persistent-volumes.md#capacity */
     @XmlElement(name="capacity", type=int.class, required=false)
     private int capacity;
-    
+
+    /**
+     * GCE disk resource provisioned by an admin; 
+     * 
+     * see http://releases.k8s.io/HEAD/docs/user-guide/volumes.md#gcepersistentdisk */
     @XmlElement(name="gcePersistentDisk", type=GCEPersistentDiskVolumeSource.class, required=false)
     private GCEPersistentDiskVolumeSource gcePersistentDisk;
     
+    /**
+     * AWS disk resource provisioned by an admin; 
+     * 
+     * see http://releases.k8s.io/HEAD/docs/user-guide/volumes.md#awselasticblockstore */
     @XmlElement(name="awsElasticBlockStore", type=AWSElasticBlockStoreVolumeSource.class, required=false)
     private AWSElasticBlockStoreVolumeSource awsElasticBlockStore;
     
@@ -43,8 +51,14 @@ public class PersistentVolumeSpec implements Serializable {
      * see http://releases.k8s.io/HEAD/examples/glusterfs/README.md */
     @XmlElement(name="glusterfs", type=GlusterfsVolumeSource.class, required=false)
     private GlusterfsVolumeSource glusterfs;
+
+    /**
+     * NFS volume resource provisioned by an admin; 
+     * 
+     * see http://releases.k8s.io/HEAD/docs/user-guide/volumes.md#nfs */
+    @XmlElement(name="nfs", type=NFSVolumeSource.class, required=false)
+    private NFSVolumeSource nfs;
     
-    private Object nfs;
     private Object rbd;
     private Object iscsi;
     private Object cephfs;

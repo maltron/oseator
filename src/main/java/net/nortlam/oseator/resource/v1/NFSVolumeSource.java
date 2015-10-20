@@ -6,6 +6,7 @@
 package net.nortlam.oseator.resource.v1;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorOrder;
@@ -44,7 +45,83 @@ public class NFSVolumeSource implements Serializable {
      * forces the NFS export to be mounted with read-only permissions; 
      * 
      * see http://releases.k8s.io/HEAD/docs/user-guide/volumes.md#nfs */
-    @XmlElement(name="readOnly", type=boolean.class, required=false)
+    @XmlElement(name="readOnly", type=boolean.class, required=false, defaultValue = "false")
     private boolean readOnly;
+
+    public NFSVolumeSource() {
+    }
+
+    public NFSVolumeSource(String server, String path) {
+        this.server = server;
+        this.path = path;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public boolean isReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(boolean readOnly) {
+        this.readOnly = readOnly;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.server);
+        hash = 71 * hash + Objects.hashCode(this.path);
+        hash = 71 * hash + (this.readOnly ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NFSVolumeSource other = (NFSVolumeSource) obj;
+        if (!Objects.equals(this.server, other.server)) {
+            return false;
+        }
+        if (!Objects.equals(this.path, other.path)) {
+            return false;
+        }
+        if (this.readOnly != other.readOnly) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<nfs>");
+        builder.append("<server>").append(server != null ? server : "NULL")
+                .append("</server>");
+        builder.append("<path>").append(path != null ? path : "NULL")
+                .append("</path>");
+        builder.append("<readOnly>").append(readOnly).append("</readOnly>");
+        builder.append("</nfs>");
+        
+        return builder.toString();
+    }
     
 }
