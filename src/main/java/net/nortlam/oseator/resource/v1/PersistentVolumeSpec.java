@@ -59,11 +59,17 @@ public class PersistentVolumeSpec implements Serializable {
     @XmlElement(name="nfs", type=NFSVolumeSource.class, required=false)
     private NFSVolumeSource nfs;
     
-    private Object rbd;
-    private Object iscsi;
-    private Object cephfs;
+    private RBDVolumeSource rbd;
+    private ISCSIVolumeSource iscsi;
+    private CephFSVolumeSource cephfs;
     private Object accessModes;
-    private Object claimRef;
+    
+    /**
+     * when bound, a reference to the bound claim; 
+     * 
+     * see http://releases.k8s.io/HEAD/docs/user-guide/persistent-volumes.md#binding */
+    @XmlElement(name="claimRef", type=ObjectReference.class, required=false)
+    private ObjectReference claimRef;
     
     public static final String PERSISTENT_VOLUME_RECLAIM_POLICY_RETAIN = "Retain";
     public static final String PERSISTENT_VOLUME_RECLAIM_POLICY_RECYCLE = "Recycle";
